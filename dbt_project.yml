@@ -41,5 +41,6 @@ models:
     example:
       +materialized: table
     staging:
-      +materialized: table
+     # {{ config(materialized='table') }}
+     +materialized: table
       
