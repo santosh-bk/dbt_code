@@ -5,3 +5,19 @@ sources:
     schema: raw_schema
     tables:
       - name: raw_customer
+      - name: customers
+      - name: raw_payments
+      - name: raw_orders
+      - name: emp_salary
+      - name: customer_data
+        columns:
+         - name: id
+           tests:
+           - unique
+           - not_null
+         - name: status
+           tests:
+             - accepted_values:
+                  values: ['placed', 'shipped', 'completed', 'returned', 'return_pending']
+  
+  
