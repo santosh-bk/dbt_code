@@ -42,6 +42,12 @@ models:
       +materialized: view
     staging:
      +materialized: table
+     confirmed:
+      +materialized: table
+    dim:
+      +materialized: table
+    fct:
+      +materialized: table
     
 snapshots:
- +target_schema: snapshots
+ +target_schema: DWH
