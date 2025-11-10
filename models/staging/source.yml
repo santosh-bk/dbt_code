@@ -1,23 +1,69 @@
 version: 2
 sources:
-  - name: datafeed_shared_schema
-    database: "{{('sales')}}"
-    schema: raw_schema
-    tables:
-      - name: raw_customer
-      - name: customers
-      - name: raw_payments
-      - name: raw_orders
-      - name: emp_salary
-      - name: customer_data
-        columns:
-         - name: id
-           tests:
-           - unique
-           - not_null
-         - name: status
-           tests:
-             - accepted_values:
-                  values: ['placed', 'shipped', 'completed', 'returned', 'return_pending']
-  
-  
+    - name: netflix
+      schema: raw
+      tables:
+      - name: r_movies
+        identifier: raw_movies
+      - name: r_ratings
+        identifier: raw_ratings
+      - name: r_tags
+        identifier: raw_tags
+      - name: r_genome_tags
+        identifier: raw_genome_tags
+      - name: r_genome_scores
+        identifier: raw_genome_scores
+      - name: r_links
+        identifier: raw_links
+        
+    - name: snowflake_data
+      database: "{{('sales')}}"
+      schema: dev
+      tables:
+        - name: RAW_LINEITEM
+          columns:
+            - name: l_orderkey
+              tests:
+                - not_null
+            - name: l_quantity
+              tests:
+                - not_null
+            - name: l_linenumber
+              tests:
+                - not_null  
+        - name: RAW_NATION
+          columns:
+            - name: n_nationkey
+              tests:
+                - unique
+                - not_null
+            - name: n_name
+              tests:
+                - not_null
+        - name: RAW_ORDER
+          columns:
+            - name: o_orderkey
+              tests:
+               - unique
+               - not_null
+
+        - name: RAW_CUSTOMER 
+          columns:
+           - name: c_custkey
+             tests:
+              - unique
+              - not_null
+           - name: c_name
+             tests:
+               - not_null
+        - name: RAW_SUPPLIER
+        - name: RAW_PARTSUPP
+        - name: RAW_PART
+        - name : RAW_REGION
+        - name : RAW_CUSTOMER_NATION
+ 
+    - name: snapshot_tables
+      database: "{{('sales')}}"
+      schema: DWH
+      tables:
+        - name: snap_ordersdetails
